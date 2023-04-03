@@ -1,0 +1,37 @@
+version: "3"
+volumes:
+  nextcloud-data:
+    external: true
+  nextcloud-db:
+
+networks:
+  ngnix_default:
+    external: true
+
+services:
+  nextcloud-app:
+    image: nextcloud
+    restart: always
+    volumes:
+      - nextcloud-data:/var/www/html
+    environment:
+      - MYSQL_PASSWORD= #Place MySQL passwd here#
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+      - MYSQL_HOST=nextcloud-db
+    networks:
+      - ngnix_default
+
+  nextcloud-db:
+    image: mariadb
+    restart: always
+    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW --innodb-file-per-table=1 --skip-innodb-read-only-compressed
+    volumes:
+      - nextcloud-db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD= #Set root db passwd. It must be diffrent from db passwd below#
+      - MYSQL_PASSWORD= #Set your MYSQL passwd here#
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+    networks:
+      - ngnix_default
