@@ -29,7 +29,7 @@ services:
     volumes:
       - nextcloud-db:/var/lib/mysql
     environment:
-      - MYSQL_ROOT_PASSWORD= #Set root db passwd. It must be diffrent from db passwd below#
+      - MYSQL_ROOT_PASSWORD= #Set root db passwd. It must be different from db passwd below#
       - MYSQL_PASSWORD= #Set your MYSQL passwd here#
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=nextcloud
