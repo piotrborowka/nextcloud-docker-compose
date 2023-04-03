@@ -1,2 +1,2 @@
 # nextcloud-docker-compose
-Nextcloud docker compose example with Ngnix proxy and MySQL database
+Nextcloud docker compose example with Nginx reverse proxy and MySQL database
